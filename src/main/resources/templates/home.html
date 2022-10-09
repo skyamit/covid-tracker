@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coronavirous Tracker</title>
+    <style>
+        body{
+            background-color:#2a98e0;
+            font-family:monospace;
+            margin:0px;
+        }
+
+        #heading{
+            display:grid;
+            justify-content:space-around;
+            background-color:#97d6ff;
+        }
+
+        #table-div{
+            display:flex;
+            justify-content:space-around;
+        }
+        table{
+            align-items:center;
+            margin-top:20px;
+        }
+        #table-heading{
+            background-color:#006fb8;
+            font-size:20px;
+            color:white;
+        }
+
+        #table-row{
+            background-color:#cdebff;
+            font-size:14px;
+        }
+
+        th,td{
+            padding:10px;
+        }
+
+        #footer-message{
+            margin-top: 20px;
+            background-color: #005b96;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 1px 1px 1px black, 0 0 7px white, 0 0 5px white;
+        }
+
+        #header-div{
+            display:flex;
+            justify-content:space-around;
+            align-items:center;
+            background-color:#005b96;
+            color:white;
+            font-size:calc(7px + .9vw);;
+        }
+        header-div h3{
+            padding:10px;
+            marign:0px;
+            font-size:40px;
+        }
+        #links{
+            display:flex;
+            justify-content:space-around;
+        }
+        #header-div h3:hover{
+            color:black;
+        }
+        #links h3{
+            margin-left:20px;
+        }
+        td{
+            font-weight:bold;
+        }
+        a{
+            text-decoration:none;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="header-div">
+            <div id="header-name">
+                <h3>COVID TRACKER</h3>
+            </div>
+            <div id="links">
+                <a href="countries.html"><h3>Countries</h3></a>
+                <a href="today.html"><h3>Today</h3></a>
+                <a href="total-cases.html"><h3>Total-Cases</h3></a>
+            </div>
+            <div id="contact-me">
+                <h3>CONTACT ME</h3>
+            </div>
+        </div>
+    </header>
+
+    <div id="heading">
+        <h1>Coronavirous Tracker Application</h1>
+        <h3>This application lists the current number of cases reported across the globe.</h3>
+    </div>
+
+    <div id="table-div">
+        <table>
+
+            <tr id="table-heading">
+                <th>Country</th>
+                <th>State</th>
+                <th>Total Reported Cases</th>
+            </tr>
+
+            <tr id="table-row" th:each="lcoationStat : ${locationStats}">
+                <td th:text="${lcoationStat.country}">Not Available</td>
+                <td th:text="${lcoationStat.state}">Not Available</td>
+                <td th:text="${lcoationStat.latestTotalCases}">0</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <footer>
+        <div id="footer-message">
+            <h3><span style="color:#FF9933">Made with </span>
+                <span style="color:white">Love by</span>
+                <span style="color:#138808"> Amit Kumar</span></h3>
+        </div>
+    </footer>
+</body>
+</html>
