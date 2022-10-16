@@ -1,5 +1,6 @@
 package com.skyamit.covidtracker.services;
 
+import com.skyamit.covidtracker.models.CountriesCount;
 import com.skyamit.covidtracker.models.LocationStats;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -13,18 +14,22 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CovidDataServices {
     private String dataUrl ="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/";
     private String tempDate = "09-10-2022.csv";
+    private String lastDate = "09-09-2022.csv";
     private List<LocationStats> list = new ArrayList<>();
-
+    private List<CountriesCount> countriesCounts = new ArrayList<>();
+    private List<CountriesCount> todayCases = new ArrayList<>();
+    private Long totalCount;
     @PostConstruct
     @Scheduled(cron="* * 1 * * *")
     public void fetchData() throws IOException, InterruptedException {
+        Date date = new Date();
+        
         String link = dataUrl + tempDate;
 
         HttpClient client = HttpClient.newHttpClient();
@@ -36,16 +41,62 @@ public class CovidDataServices {
         Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(stringReader);
 
         List<LocationStats> newList = new ArrayList<>();
+        HashMap<String,Long> map = new HashMap<>();
 
         for(CSVRecord record : records){
+            String country = record.get("Country_Region");
+            Long confirmed = Long.valueOf(record.get("Confirmed"));
+            String state = record.get("Province_State");
             LocationStats locationStats = new LocationStats();
-            locationStats.setCountry(record.get("Country_Region"));
-            locationStats.setState(record.get("Province_State"));
-            locationStats.setLatestTotalCases(record.get("Confirmed"));
+            locationStats.setCountry(country);
+            locationStats.setState(state);
+            locationStats.setLatestTotalCases(confirmed+"");
             newList.add(locationStats);
+            map.put(country,map.getOrDefault(country,0l)+confirmed);
         }
 
+        Collections.sort(newList,(A,B)->(Integer.valueOf(B.getLatestTotalCases()) - Integer.valueOf(A.getLatestTotalCases())));
         this.list = newList;
+
+        List<CountriesCount> newCountries = new ArrayList<>();
+        for(Map.Entry<String, Long> entry : map.entrySet()){
+            newCountries.add(new CountriesCount(entry.getKey(),entry.getValue()+""));
+        }
+
+        Collections.sort(newCountries,(A,B)->((int)(Long.valueOf(B.getCovidCaseCount())-Long.valueOf(A.getCovidCaseCount()))));
+        this.countriesCounts = newCountries;
+
+        Long newTotal = 0l;
+
+        for(CountriesCount countriesCount : newCountries) {
+            newTotal += Long.valueOf(countriesCount.getCovidCaseCount());
+        }
+        this.totalCount = newTotal;
+
+
+        // new cases
+        String lastLink = dataUrl + lastDate;
+
+        HttpRequest lastRequest = HttpRequest.newBuilder().uri(URI.create(lastLink)).build();
+
+        HttpResponse<String> lastHttpResponse = client.send(lastRequest,HttpResponse.BodyHandlers.ofString());
+
+        StringReader lastReader = new StringReader(lastHttpResponse.body());
+        Iterable<CSVRecord> lastRecords = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(lastReader);
+
+        for(CSVRecord record : lastRecords){
+            String country = record.get("Country_Region");
+            Long confirmed = Long.valueOf(record.get("Confirmed"));
+            map.put(country,map.getOrDefault(country,0l)-confirmed);
+        }
+
+        List<CountriesCount> todayList = new ArrayList<>();
+        for(Map.Entry<String, Long> entry : map.entrySet()){
+            todayList.add(new CountriesCount(entry.getKey(),entry.getValue()+""));
+        }
+        Collections.sort(todayList,(A,B)->((int)(Long.valueOf(B.getCovidCaseCount())-Long.valueOf(A.getCovidCaseCount()))));
+        this.todayCases = todayList;
+
     }
 
 
@@ -55,5 +106,25 @@ public class CovidDataServices {
 
     public void setList(List<LocationStats> list) {
         this.list = list;
+    }
+
+    public void setCountriesCounts(List<CountriesCount> countriesCounts) { this.countriesCounts = countriesCounts; }
+
+    public List<CountriesCount> getCountriesCounts() { return countriesCounts; }
+
+    public Long getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Long totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public List<CountriesCount> getTodayCases() {
+        return todayCases;
+    }
+
+    public void setTodayCases(List<CountriesCount> todayCases) {
+        this.todayCases = todayCases;
     }
 }

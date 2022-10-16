@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Coronavirous Tracker</title>
-    <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coronavirous Total Cases</title>
+  <style>
+        input{
+          font-family:monospace;
+        }
+        tr{
+          margin:0px;
+        }
         body{
             background-color:#2a98e0;
             font-family:monospace;
@@ -16,7 +22,11 @@
             justify-content:space-around;
             background-color:#97d6ff;
         }
-
+        #body{
+            display:grid;
+            justify-content:space-around;
+            background-color:#97d6ff;
+        }
         #table-div{
             display:flex;
             justify-content:space-around;
@@ -83,51 +93,56 @@
     </style>
 </head>
 <body>
-    <header>
-        <div id="header-div">
-            <div id="header-name">
-                <a href="/"><h3>COVID TRACKER</h3></a>
-            </div>
-            <div id="links">
-                <a href="/countries"><h3>Countries</h3></a>
-                <a href="/today"><h3>Today</h3></a>
-                <a href="/totalCases"><h3>Total-Cases</h3></a>
-            </div>
-            <div id="contact-me">
-                <a href="/contactMe"><h3>CONTACT ME</h3></a>
-            </div>
-        </div>
-    </header>
-
-    <div id="heading">
-        <h1>Coronavirous Tracker Application</h1>
-        <h3>This application lists the current number of cases reported across the globe.</h3>
+<header>
+  <div id="header-div">
+    <div id="header-name">
+      <a href="/"><h3>COVID TRACKER</h3></a>
     </div>
-
-    <div id="table-div">
-        <table>
-
-            <tr id="table-heading">
-                <th>Country</th>
-                <th>State</th>
-                <th>Total Reported Cases</th>
-            </tr>
-
-            <tr id="table-row" th:each="lcoationStat : ${locationStats}">
-                <td th:text="${lcoationStat.country}">Not Available</td>
-                <td th:text="${lcoationStat.state}">Not Available</td>
-                <td th:text="${lcoationStat.latestTotalCases}">0</td>
-            </tr>
-
-        </table>
+    <div id="links">
+      <a href="/countries"><h3>Countries</h3></a>
+      <a href="/today"><h3>Today</h3></a>
+      <a href="/totalCases"><h3>Total-Cases</h3></a>
     </div>
+    <div id="contact-me">
+      <a href="/contactMe"><h3>CONTACT ME</h3></a>
+    </div>
+  </div>
+</header>
 
-    <footer>
-        <div id="footer-message">
-            <h3><span style="color:#FF9933">Made with </span>
-                <span style="color:white">Love by</span>
-                <span style="color:#138808"> Amit Kumar</span></h3>
-        </div>
-    </footer>
+<div id="heading">
+  <h1>Coronavirous Tracker Application</h1>
+  <h3>This application lists the current number of cases reported across the globe.</h3>
+</div>
+
+<div id="body" style="margin-top:50px;padding:100px;">
+  <table>
+    <h3>Contact Form</h3>
+    <tr>
+      <td><h4>Email Id : </h4></td>
+      <td><input type="email" id="email" placeholder="Enter your email"/></td>
+    </tr>
+    <tr>
+      <td><h4>Subject :</h4></td>
+      <td><input type="subject" id="subject" placeholder="Your Subject"/></td>
+    </tr>
+    <tr>
+      <td><h4>Body :</h4></td>
+      <td><textarea id="mail-body" rows="6" cols="20"></textarea></td>
+    </tr>
+    <tr>
+      <td>
+        <button style="font-family:monospace;font-weight:bold;padding:5px;">Submit</button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<footer>
+  <div id="footer-message">
+    <h3><span style="color:#FF9933">Made with </span>
+      <span style="color:white">Love by</span>
+      <span style="color:#138808"> Amit Kumar</span></h3>
+  </div>
+</footer>
 </body>
 </html>
