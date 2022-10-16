@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Coronavirous cases country count</title>
+    <title>Coronavirous Tracker</title>
     <style>
         body{
             background-color:#2a98e0;
@@ -83,49 +83,51 @@
     </style>
 </head>
 <body>
-<header>
-    <div id="header-div">
-        <div id="header-name">
-            <a href="/"><h3>COVID TRACKER</h3></a>
+    <header>
+        <div id="header-div">
+            <div id="header-name">
+                <a href="/"><h3>COVID TRACKER</h3></a>
+            </div>
+            <div id="links">
+                <a href="/countries"><h3>Countries</h3></a>
+                <a href="/today"><h3>Today</h3></a>
+                <a href="/totalCases"><h3>Total-Cases</h3></a>
+            </div>
+            <div id="contact-me">
+                <a href="/contactMe"><h3>CONTACT ME</h3></a>
+            </div>
         </div>
-        <div id="links">
-            <a href="/countries"><h3>Countries</h3></a>
-            <a href="/today"><h3>Today</h3></a>
-            <a href="/totalCases"><h3>Total-Cases</h3></a>
-        </div>
-        <div id="contact-me">
-            <a href="/contactMe"><h3>CONTACT ME</h3></a>
-        </div>
+    </header>
+
+    <div id="heading">
+        <h1>Coronavirus Tracker Application</h1>
+        <h3>Total coronavirus cases reported around globe based on country names and their states sorted in decreasing order of cases.</h3>
     </div>
-</header>
 
-<div id="heading">
-    <h1>Coronavirous Tracker Application</h1>
-    <h3>This application lists the current number of cases reported across the globe.</h3>
-</div>
+    <div id="table-div">
+        <table>
 
-<div id="table-div">
-    <table>
+            <tr id="table-heading">
+                <th>Country</th>
+                <th>State</th>
+                <th>Total Reported Cases</th>
+            </tr>
 
-        <tr id="table-heading">
-            <th>Country</th>
-            <th>Total Reported Cases</th>
-        </tr>
+            <tr id="table-row" th:each="lcoationStat : ${locationStats}">
+                <td th:text="${lcoationStat.country}">Not Available</td>
+                <td th:text="${lcoationStat.state}">Not Available</td>
+                <td th:text="${lcoationStat.latestTotalCases}">0</td>
+            </tr>
 
-        <tr id="table-row" th:each="countriesName : ${countriesName}">
-            <td th:text="${countriesName.countryName}">Not Available</td>
-            <td th:text="${countriesName.covidCaseCount}">0</td>
-        </tr>
-
-    </table>
-</div>
-
-<footer>
-    <div id="footer-message">
-        <h3><span style="color:#FF9933">Made with </span>
-            <span style="color:white">Love by</span>
-            <span style="color:#138808"> Amit Kumar</span></h3>
+        </table>
     </div>
-</footer>
+
+    <footer>
+        <div id="footer-message">
+            <h3><span style="color:#FF9933">Made with </span>
+                <span style="color:white">Love by</span>
+                <span style="color:#138808"> Amit Kumar</span></h3>
+        </div>
+    </footer>
 </body>
 </html>

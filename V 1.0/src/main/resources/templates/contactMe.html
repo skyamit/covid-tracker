@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Coronavirous Total Cases</title>
+  <title>Contact Me</title>
   <style>
         input{
           font-family:monospace;
+          height:30px;
         }
         tr{
           margin:0px;
@@ -20,6 +21,7 @@
         #heading{
             display:grid;
             justify-content:space-around;
+            align-content:center;
             background-color:#97d6ff;
         }
         #body{
@@ -104,7 +106,7 @@
       <a href="/totalCases"><h3>Total-Cases</h3></a>
     </div>
     <div id="contact-me">
-      <a href="/contactMe"><h3>CONTACT ME</h3></a>
+      <a href="/contactMe"><h3 style="color:#c2c2c2;">CONTACT ME</h3></a>
     </div>
   </div>
 </header>
@@ -114,27 +116,18 @@
   <h3>This application lists the current number of cases reported across the globe.</h3>
 </div>
 
-<div id="body" style="margin-top:50px;padding:100px;">
-  <table>
-    <h3>Contact Form</h3>
-    <tr>
-      <td><h4>Email Id : </h4></td>
-      <td><input type="email" id="email" placeholder="Enter your email"/></td>
-    </tr>
-    <tr>
-      <td><h4>Subject :</h4></td>
-      <td><input type="subject" id="subject" placeholder="Your Subject"/></td>
-    </tr>
-    <tr>
-      <td><h4>Body :</h4></td>
-      <td><textarea id="mail-body" rows="6" cols="20"></textarea></td>
-    </tr>
-    <tr>
-      <td>
-        <button style="font-family:monospace;font-weight:bold;padding:5px;">Submit</button>
-      </td>
-    </tr>
-  </table>
+<div id="body" style="margin:50px 0px 50px 0px;padding:20px;">
+    <div style="margin-left:-15px;">
+        <h2 style="margin:2px;">Contact Form</h2>
+    </div>
+    <h3 style="margin:2px;">Email Id : </h3>
+    <input type="email" id="email" placeholder="Enter your email"/>
+    <h3 style="margin:2px;">Subject :</h3>
+    <input type="subject" id="subject" placeholder="Your Subject"/>
+    <h3 style="margin:2px;">Body :</h3>
+    <textarea placeholder="Message for me" id="mail-body" rows="6" cols="45"></textarea>
+    <button style="background-color:blue;color:white;margin-top:10px;font-family:monospace;font-weight:bold;padding:5px;">Submit</button>
+
 </div>
 
 <footer>

@@ -2,10 +2,12 @@ package com.skyamit.covidtracker.services;
 
 import com.skyamit.covidtracker.models.CountriesCount;
 import com.skyamit.covidtracker.models.LocationStats;
+import com.sun.source.tree.CaseLabelTree;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.yaml.snakeyaml.emitter.ScalarAnalysis;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -19,17 +21,55 @@ import java.util.*;
 @Service
 public class CovidDataServices {
     private String dataUrl ="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/";
-    private String tempDate = "09-10-2022.csv";
-    private String lastDate = "09-09-2022.csv";
     private List<LocationStats> list = new ArrayList<>();
     private List<CountriesCount> countriesCounts = new ArrayList<>();
     private List<CountriesCount> todayCases = new ArrayList<>();
     private Long totalCount;
     @PostConstruct
-    @Scheduled(cron="* * 1 * * *")
+    @Scheduled(cron="* 1 * * * *")
     public void fetchData() throws IOException, InterruptedException {
-        Date date = new Date();
-        
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE,-2);
+        int date = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH)+1;
+        int year = calendar.get(Calendar.YEAR);
+
+        String datee = "";
+        if(date<10){
+            datee = "0"+date;
+        }
+        else{
+            datee = date+"";
+        }
+        String monthh = "";
+        if(month<10){
+            monthh = "0"+month;
+        }
+        else{
+            monthh = month+"";
+        }
+        String tempDate = monthh+"-"+datee+"-"+year+".csv";
+
+        calendar.add(Calendar.DATE,-1);
+        date = calendar.get(Calendar.DAY_OF_MONTH);
+        month = calendar.get(Calendar.MONTH)+1;
+
+        if(date<10){
+            datee = "0"+date;
+        }
+        else{
+            datee = date+"";
+        }
+        if(month<10){
+            monthh = "0"+month;
+        }
+        else{
+            monthh = month+"";
+        }
+
+        // first is month, day, year
+        String lastDate = monthh+"-"+datee+"-"+year+".csv";
+
         String link = dataUrl + tempDate;
 
         HttpClient client = HttpClient.newHttpClient();
