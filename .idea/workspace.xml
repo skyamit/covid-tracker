@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d81fffe-1439-497c-9fce-d0d6957a3ed1" name="Changes" comment="" />
+    <list default="true" id="7d81fffe-1439-497c-9fce-d0d6957a3ed1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/skyamit/covidtracker/services/CovidDataServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/skyamit/covidtracker/services/CovidDataServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/contactMe.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/contactMe.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/countries.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/countries.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/today.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/today.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/totalCases.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/totalCases.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
