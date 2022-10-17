@@ -2,20 +2,15 @@ package com.skyamit.covidtracker.services;
 
 import com.skyamit.covidtracker.models.CountriesCount;
 import com.skyamit.covidtracker.models.LocationStats;
-import com.sun.source.tree.CaseLabelTree;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.emitter.ScalarAnalysis;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.*;
 
 @Service
@@ -72,12 +67,9 @@ public class CovidDataServices {
 
         String link = dataUrl + tempDate;
 
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(link)).build();
+        RestTemplate restTemplate = new RestTemplate();
 
-        HttpResponse<String> httpResponse = client.send(request,HttpResponse.BodyHandlers.ofString());
-
-        StringReader stringReader = new StringReader(httpResponse.body());
+        StringReader stringReader = new StringReader(restTemplate.getForObject(link,String.class));
         Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(stringReader);
 
         List<LocationStats> newList = new ArrayList<>();
@@ -117,11 +109,7 @@ public class CovidDataServices {
         // new cases
         String lastLink = dataUrl + lastDate;
 
-        HttpRequest lastRequest = HttpRequest.newBuilder().uri(URI.create(lastLink)).build();
-
-        HttpResponse<String> lastHttpResponse = client.send(lastRequest,HttpResponse.BodyHandlers.ofString());
-
-        StringReader lastReader = new StringReader(lastHttpResponse.body());
+        StringReader lastReader = new StringReader(restTemplate.getForObject(lastLink,String.class));
         Iterable<CSVRecord> lastRecords = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(lastReader);
 
         for(CSVRecord record : lastRecords){
