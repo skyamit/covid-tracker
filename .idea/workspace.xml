@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7d81fffe-1439-497c-9fce-d0d6957a3ed1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/skyamit/covidtracker/models/LocationStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/skyamit/covidtracker/models/LocationStats.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/skyamit/covidtracker/services/CovidDataServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/skyamit/covidtracker/services/CovidDataServices.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -6,6 +6,12 @@ public class LocationStats {
     private String country;
     private String latestTotalCases;
 
+    public LocationStats(String state, String country, String latestTotalCases) {
+        this.state = state;
+        this.country = country;
+        this.latestTotalCases = latestTotalCases;
+    }
+
     public String getState() {
         return state;
     }
