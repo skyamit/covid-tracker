@@ -33,7 +33,7 @@ For support, email amit7646014@gmail.com or ping me in https://linkedin.com/in/s
 ![alt text](https://github.com/skyamit/covid-tracker/blob/main/Screenshots/home.png)
 
 ### Total cases reported till current date
-![alt text](https://github.com/skyamit/covid-tracker/blob/main/Screenshots/totalCase'.png)
+![alt text](https://github.com/skyamit/covid-tracker/blob/main/Screenshots/totalCase.png)
 
 ### Total cases reported today
 ![alt text](https://github.com/skyamit/covid-tracker/blob/main/Screenshots/today.png)
