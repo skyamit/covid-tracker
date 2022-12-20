@@ -90,7 +90,6 @@
             </div>
             <div id="links">
                 <a href="/countries"><h3>Countries</h3></a>
-                <a href="/today"><h3>Today</h3></a>
                 <a href="/totalCases"><h3>Total-Cases</h3></a>
             </div>
             <div id="contact-me">
@@ -102,6 +101,7 @@
     <div id="heading">
         <h1>Coronavirus Tracker Application</h1>
         <h3>Total coronavirus cases reported around globe based on country names and their states sorted in decreasing order of cases.</h3>
+        <h4> <span class="text-warning">Note :</span> We are not updating this since API which we were using is depricated.</h4> 
     </div>
 
     <div id="table-div">
@@ -110,13 +110,15 @@
             <tr id="table-heading">
                 <th>Country</th>
                 <th>State</th>
-                <th>Total Reported Cases</th>
+                <th>Total</th>
+                <th>Death</th>
             </tr>
 
             <tr id="table-row" th:each="lcoationStat : ${locationStats}">
                 <td th:text="${lcoationStat.country}">Not Available</td>
                 <td th:text="${lcoationStat.state}">Not Available</td>
-                <td th:text="${lcoationStat.latestTotalCases}">0</td>
+                <td th:text="${lcoationStat.confirmed}">0</td>
+                <td th:text="${lcoationStat.death}">0</td>
             </tr>
 
         </table>
