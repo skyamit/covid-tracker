@@ -35,9 +35,4 @@ public class HomeController {
         return "contactMe";
     }
 
-    @GetMapping("/today")
-    public String today(Model mode){
-        mode.addAttribute("newCount",covidDataServices.getTodayCases());
-        return "today";
-    }
 }
