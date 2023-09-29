@@ -6,7 +6,7 @@
 3. Total Coronavirus cases based on states along with countries names.
 4. New cases which are reported today based on country.
 
-## Live Link - https://covid-tracker-aps.herokuapp.com/
+## Demo Link - https://www.youtube.com/watch?v=38oMY2XjErY
 
 ## Download command
 ```
